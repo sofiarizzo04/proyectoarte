@@ -1,0 +1,67 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  background: #faf7f2;
+  color: #2b2b2b;
+  line-height: 1.6;
+}
+
+/* PORTADA */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #2b2d42, #8d5a97);
+  color: #fff;
+}
+.hero h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); letter-spacing: 2px; }
+.hero p { margin: 1rem 0 2.5rem; font-size: 1.2rem; max-width: 520px; }
+
+.botones-artistas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+.boton {
+  padding: 0.9rem 2rem;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+.boton:hover { background: #fff; color: #2b2d42; transform: translateY(-3px); }
+
+/* ARTISTAS */
+.artista { max-width: 900px; margin: 0 auto; padding: 5rem 1rem 3rem; text-align: center; }
+.artista h2 { font-size: 2.3rem; margin-bottom: 0.5rem; }
+.bio { max-width: 600px; margin: 0 auto 2rem; color: #555; }
+
+/* CARRUSEL: las fotos van una al lado de la otra y se deslizan */
+.carrusel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  border-radius: 12px;
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  scrollbar-color: #8d5a97 #ddd;
+}
+.carrusel img {
+  flex: 0 0 100%;
+  width: 100%;
+  max-height: 560px;
+  object-fit: contain;
+  scroll-snap-align: start;
+}
+
+.volver { display: inline-block; margin-top: 1.5rem; color: #8d5a97; text-decoration: none; }
+.volver:hover { text-decoration: underline; }
+
+footer { text-align: center; padding: 2rem 1rem; background: #2b2d42; color: #fff; }
+
+@media (max-width: 600px) { .artista { padding-top: 3.5rem; } }
