@@ -48,7 +48,7 @@ body {
   border-radius: 12px;
   background: #000;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  scrollbar-color: #8d5a97 #ddd;
+  scrollbar-color: #33579b #ddd;
 }
 .carrusel img {
   flex: 0 0 100%;
