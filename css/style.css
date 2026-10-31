@@ -63,4 +63,18 @@ body {
 
 footer { text-align: center; padding: 2rem 1rem; background: #2b2d42; color: #fff; }
 
+.pie {
+  background: #011244;
+  color: #b4bdd6;
+  padding: 28px 24px;
+  font-size: 14px;
+}
+.pie-contenido {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.pie strong { color: #fff; }
+
 @media (max-width: 600px) { .artista { padding-top: 3.5rem; } }
