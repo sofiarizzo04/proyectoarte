@@ -3,6 +3,8 @@
    Cada artista tiene una lista "obras": una por imagen, en orden.
    Cada obra lleva: titulo, tecnica (opcional) y texto (la explicación).
    Si falta una obra, se muestra un texto de relleno.
+   "omitir" sirve para saltear números de imagen que no existen.
+   Los textos van en el orden en que se ven en el carrusel.
    ============================================================ */
 const ARTISTAS = {
   estefaniaferreira: {
@@ -30,6 +32,7 @@ const ARTISTAS = {
   },
   brisascomazzon: {
     cantidad: 18,
+    omitir: [13],                      // no existe tp13brisas.jpeg, se salta
     ruta: n => `img/tp${n}brisas.jpeg`,
     obras: [
       { titulo: "Título de la obra 1", tecnica: "Técnica y materiales", texto: "Explicación de la obra 1." }

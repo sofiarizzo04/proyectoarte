@@ -35,6 +35,7 @@ body {
     radial-gradient(ellipse at 50% 120%, rgba(60, 80, 255, .35), transparent 60%),
     linear-gradient(160deg, #15008a, var(--tinta) 75%);
 }
+.botones h1 img { display: block; width: min(620px, 88vw); height: auto; margin: 0 auto; }
 .botones h1 {
   font-family: var(--display);
   font-weight: 500;
@@ -182,6 +183,23 @@ body {
   .flecha.prev { left: -8px; }
   .flecha.next { right: -8px; }
   .cartel-texto { max-height: none; }
+}
+
+@media (max-width: 600px) {
+  .botones { padding: 2rem 1rem; }
+  .botones p { font-size: 1rem; margin-bottom: 2rem; }
+  .botones-artistas { flex-direction: column; width: 100%; max-width: 320px; }
+  .boton { width: 100%; text-align: center; }
+  .artista { padding: 3.5rem .9rem 2rem; }
+  .artista h2 { margin-bottom: 1.5rem; }
+  .marco { padding: 8px; }
+  .paspartu { height: clamp(240px, 70vw, 380px); padding: 10px; }
+  .cartel { padding: 1.25rem 1.1rem; }
+  .cartel-titulo { font-size: 1.5rem; }
+  .flecha { width: 38px; height: 38px; top: calc(50% - 19px); font-size: 1.6rem; }
+}
+@media (min-width: 861px) and (max-width: 1100px) {
+  .escena { grid-template-columns: minmax(0, 1fr) 240px; gap: 1.75rem; padding: 2rem 1.5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

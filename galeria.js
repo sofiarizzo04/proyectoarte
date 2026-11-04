@@ -5,10 +5,12 @@
     const datos = ARTISTAS[el.dataset.artista];
     if (!datos) return;
 
-    const obras = Array.from({ length: datos.cantidad }, (_, i) => {
+    const numeros = Array.from({ length: datos.cantidad }, (_, i) => i + 1)
+      .filter(n => !(datos.omitir || []).includes(n));
+    const obras = numeros.map((n, i) => {
       const o = datos.obras[i] || {};
       return {
-        src: datos.ruta(i + 1),
+        src: datos.ruta(n),
         titulo: o.titulo || `Obra ${i + 1}`,
         tecnica: o.tecnica || '',
         texto: o.texto || 'Pronto vas a poder leer acá la explicación de este trabajo.'
