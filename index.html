@@ -52,86 +52,209 @@
   <footer class="pie">
     <div class="pie-contenido">
       <strong>2026 Estefania Ferreira, Sofia Juarez, Sofia Rizzo, Brisa Scomazzon 6toB</strong>
-    </div><!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galería de Arte</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" href="favicon-16x16.png">
-</head>
-<body>
-
-  <header class="botones" id="inicio">
-    <h1 class="sr-only">Galería de Arte</h1>
-    <p>Cuatro artistas, cuatro miradas. Elegí una sala para recorrer sus obras.</p>
-    <nav class="botones-artistas" aria-label="Artistas">
-      <a class="boton" href="#estefaniaferreira">Estefania Ferreira</a>
-      <a class="boton" href="#sofiajuarez">Sofia Juarez</a>
-      <a class="boton" href="#sofiarizzo">Sofia Rizzo</a>
-      <a class="boton" href="#brisascomazzon">Brisa Scomazzon</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="artista" id="estefaniaferreira">
-      <h2>Estefania Ferreira</h2>
-      <div class="galeria" data-artista="estefaniaferreira"></div>
-      <a class="volver" href="#inicio">&uarr; Volver al inicio</a>
-    </section>
-
-    <section class="artista" id="sofiajuarez">
-      <h2>Sofia Juarez</h2>
-      <div class="galeria" data-artista="sofiajuarez"></div>
-      <a class="volver" href="#inicio">&uarr; Volver al inicio</a>
-    </section>
-
-    <section class="artista" id="sofiarizzo">
-      <h2>Sofia Rizzo</h2>
-      <div class="galeria" data-artista="sofiarizzo"></div>
-      <a class="volver" href="#inicio">&uarr; Volver al inicio</a>
-    </section>
-
-    <section class="artista" id="brisascomazzon">
-      <h2>Brisa Scomazzon</h2>
-      <div class="galeria" data-artista="brisascomazzon"></div>
-      <a class="volver" href="#inicio">&uarr; Volver al inicio</a>
-    </section>
-  </main>
-
-  <footer class="pie">
-    <div class="pie-contenido">
-      <strong>2026 Estefania Ferreira, Sofia Juarez, Sofia Rizzo, Brisa Scomazzon 6toB</strong>
     </div>
   </footer>
 
   <script>
-    function avisar(archivo) {
-      var d = document.createElement('div');
-      d.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99;background:#b00020;color:#fff;padding:12px;text-align:center;font:15px sans-serif';
-      d.textContent = 'No se pudo cargar ' + archivo + '. Tiene que estar en la misma carpeta que index.html.';
-      document.body.appendChild(d);
-    }
-  </script>
-  <script src="obras.js" onerror="avisar('obras.js')"></script>
-  <script src="galeria.js" onerror="avisar('galeria.js')"></script>
-</body>
-</html>
-  </footer>
+/* ============================================================
+   AQUÍ SE EDITAN LOS TEXTOS DE CADA OBRA.
+   Cada artista tiene una lista "obras": una por imagen, en orden.
+   Cada obra lleva: titulo, tecnica (opcional) y texto (la explicación).
+   Si falta una obra, se muestra un texto de relleno.
+   "omitir" sirve para saltear números de imagen que no existen.
+   Los textos van en el orden en que se ven en el carrusel.
+   ============================================================ */
+const ARTISTAS = {
+  estefaniaferreira: {
+    cantidad: 18,
+    ruta: n => `imagenes/a1-${n}.jpg`,
+    obras: [
+      { titulo: "Título de la obra 1", tecnica: "Técnica y materiales", texto: "Explicá acá de qué trata el trabajo, qué idea querías transmitir y cómo lo hiciste." },
+      { titulo: "Título de la obra 2", tecnica: "Técnica y materiales", texto: "Explicación de la obra 2." }
+      // ...seguí agregando hasta la 18
+    ]
+  },
+  sofiajuarez: {
+    cantidad: 18,
+    ruta: n => `imagenes/a2-${n}.jpg`,
+    obras: [
+      { titulo: "Título de la obra 1", tecnica: "Técnica y materiales", texto: "Explicación de la obra 1." }
+    ]
+  },
+  sofiarizzo: {
+    cantidad: 18,
+    ruta: n => `imagenes/a3-${n}.jpg`,   // ← antes apuntaba a a2: renombrá tus fotos a a3-1.jpg, a3-2.jpg...
+    obras: [
+      { titulo: "Título de la obra 1", tecnica: "Técnica y materiales", texto: "Explicación de la obra 1." }
+    ]
+  },
+  brisascomazzon: {
+    cantidad: 18,
+    omitir: [13],                      // no existe tp13brisas.jpeg, se salta
+    ruta: n => `img/tp${n}brisas.jpeg`,
+    obras: [
+      { titulo: "Título de la obra 1", tecnica: "Técnica y materiales", texto: "Explicación de la obra 1." }
+    ]
+  }
+};
+
+const TIEMPO_AUTOMATICO = 6000; // milisegundos entre una obra y la siguiente
+
+</script>
 
   <script>
-    function avisar(archivo) {
-      var d = document.createElement('div');
-      d.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99;background:#b00020;color:#fff;padding:12px;text-align:center;font:15px sans-serif';
-      d.textContent = 'No se pudo cargar ' + archivo + '. Tiene que estar en la misma carpeta que index.html.';
-      document.body.appendChild(d);
+(function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.galeria').forEach(el => {
+    const datos = ARTISTAS[el.dataset.artista];
+    if (!datos) return;
+
+    const numeros = Array.from({ length: datos.cantidad }, (_, i) => i + 1)
+      .filter(n => !(datos.omitir || []).includes(n));
+    const obras = numeros.map((n, i) => {
+      const o = datos.obras[i] || {};
+      return {
+        src: datos.ruta(n),
+        titulo: o.titulo || `Obra ${i + 1}`,
+        tecnica: o.tecnica || '',
+        texto: o.texto || 'Pronto vas a poder leer acá la explicación de este trabajo.'
+      };
+    });
+
+    el.innerHTML = `
+      <div class="escena" tabindex="0" aria-roledescription="carrusel" aria-label="Obras de ${el.closest('section').querySelector('h2').textContent}">
+        <div class="vitrina">
+          <button class="flecha prev" type="button" aria-label="Obra anterior">&#8249;</button>
+          <figure class="marco"><div class="paspartu"><img alt=""><p class="falta"></p></div></figure>
+          <button class="flecha next" type="button" aria-label="Obra siguiente">&#8250;</button>
+        </div>
+        <aside class="cartel" aria-live="polite">
+          <p class="cartel-n"></p>
+          <h3 class="cartel-titulo"></h3>
+          <p class="cartel-tecnica"></p>
+          <p class="cartel-texto"></p>
+        </aside>
+      </div>
+      <div class="barra"><span></span></div>
+      <div class="puntos" role="tablist"></div>`;
+
+    const escena = el.querySelector('.escena');
+    const img = el.querySelector('.marco img');
+    const marco = el.querySelector('.marco');
+    const cartel = el.querySelector('.cartel');
+    const barra = el.querySelector('.barra span');
+    const puntos = el.querySelector('.puntos');
+    const paspartu = el.querySelector('.paspartu');
+
+    // si una imagen no carga, prueba otras carpetas y extensiones comunes
+    function candidatos(src) {
+      const i = src.lastIndexOf('/');
+      const archivo = src.slice(i + 1);
+      const nombre = archivo.replace(/\.[^.]+$/, '');
+      const ext = archivo.split('.').pop();
+      const out = [];
+      [src.slice(0, i + 1), 'img/', 'imagenes/', 'images/', ''].forEach(f =>
+        [ext, 'jpg', 'jpeg', 'png', 'webp'].forEach(e => {
+          const c = f + nombre + '.' + e;
+          if (!out.includes(c)) out.push(c);
+        }));
+      return out;
     }
-  </script>
-  <script src="obras.js" onerror="avisar('obras.js')"></script>
-  <script src="galeria.js" onerror="avisar('galeria.js')"></script>
+    function cargar(o) {
+      const lista = candidatos(o.src);
+      let k = 0;
+      paspartu.classList.remove('sin-imagen');
+      img.onload = () => paspartu.classList.remove('sin-imagen');
+      img.onerror = () => {
+        k++;
+        if (k < lista.length) img.src = lista[k];
+        else {
+          paspartu.querySelector('.falta').textContent = 'No se encontró la imagen: ' + o.src;
+          paspartu.classList.add('sin-imagen');
+        }
+      };
+      img.src = lista[0];
+    }
+    let actual = 0, timer = null, pausado = false, visible = false;
+
+    obras.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `Ir a la obra ${i + 1}`);
+      b.addEventListener('click', () => { ir(i); reiniciar(); });
+      puntos.appendChild(b);
+    });
+
+    function ir(i) {
+      actual = (i + obras.length) % obras.length;
+      const o = obras[actual];
+      marco.classList.add('cambiando');
+      cartel.classList.add('cambiando');
+      setTimeout(() => {
+        cargar(o);
+        img.alt = `${o.titulo}`;
+        cartel.querySelector('.cartel-n').textContent = `${actual + 1} de ${obras.length}`;
+        cartel.querySelector('.cartel-titulo').textContent = o.titulo;
+        cartel.querySelector('.cartel-tecnica').textContent = o.tecnica;
+        cartel.querySelector('.cartel-texto').textContent = o.texto;
+        marco.classList.remove('cambiando');
+        cartel.classList.remove('cambiando');
+      }, 220);
+      [...puntos.children].forEach((p, k) => p.classList.toggle('activo', k === actual));
+      // precarga la siguiente
+      new Image().src = obras[(actual + 1) % obras.length].src;
+    }
+
+    function arrancarBarra() {
+      barra.style.animation = 'none';
+      void barra.offsetWidth;
+      if (!reduceMotion) barra.style.animation = `llenar ${TIEMPO_AUTOMATICO}ms linear forwards`;
+    }
+    function reiniciar() {
+      clearTimeout(timer);
+      arrancarBarra();
+      if (reduceMotion || pausado || !visible) { barra.style.animationPlayState = 'paused'; return; }
+      barra.style.animationPlayState = 'running';
+      timer = setTimeout(() => { ir(actual + 1); reiniciar(); }, TIEMPO_AUTOMATICO);
+    }
+    function pausar(v) {
+      pausado = v;
+      if (v) { clearTimeout(timer); barra.style.animationPlayState = 'paused'; }
+      else reiniciar();
+    }
+
+    el.querySelector('.prev').addEventListener('click', () => { ir(actual - 1); reiniciar(); });
+    el.querySelector('.next').addEventListener('click', () => { ir(actual + 1); reiniciar(); });
+    escena.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { ir(actual - 1); reiniciar(); }
+      if (e.key === 'ArrowRight') { ir(actual + 1); reiniciar(); }
+    });
+    escena.addEventListener('mouseenter', () => pausar(true));
+    escena.addEventListener('mouseleave', () => pausar(false));
+    escena.addEventListener('focusin', () => pausar(true));
+    escena.addEventListener('focusout', () => pausar(false));
+
+    // deslizar con el dedo en el celular
+    let x0 = null;
+    escena.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    escena.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) { ir(actual + (dx < 0 ? 1 : -1)); reiniciar(); }
+      x0 = null;
+    });
+
+    // solo avanza solo cuando la sala está a la vista
+    new IntersectionObserver(([en]) => {
+      visible = en.isIntersecting;
+      reiniciar();
+    }, { threshold: 0.4 }).observe(el);
+
+    ir(0);
+  });
+})();
+
+</script>
 </body>
 </html>
