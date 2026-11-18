@@ -1,122 +1,94 @@
-
 :root {
-    --fondo: #14121f;
-    --fondo-2: #231f38;
-    --texto: #d9d4f2;
-    --titulo: #f3f0ff;
-    --acento: #b9b0f5;
-    --linea: rgba(255, 255, 255, 0.28);
-
-    --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-    --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+    --fondo: #0e0c11;
+    --fondo-item: rgba(255, 255, 255, 0.04);
+    --texto: #e9e6ee;
+    --lavanda: #b9b3f0;
+    --borde: rgba(255, 255, 255, 0.55);
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
     margin: 0;
     min-height: 100vh;
-    padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 5vw, 4rem) 4rem;
-    font-family: var(--sans);
-    font-weight: 400;
+    background: var(--fondo);
     color: var(--texto);
-    background:
-        radial-gradient(ellipse at 50% 0%, var(--fondo-2) 0%, transparent 65%),
-        var(--fondo);
-    background-attachment: fixed;
-    -webkit-font-smoothing: antialiased;
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.teoria {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 5rem;
 }
 
 h2 {
-    max-width: 22ch;
-    margin: 0 auto clamp(2rem, 5vw, 3.5rem);
-    padding-bottom: 1.5rem;
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(2.2rem, 5.5vw, 3.8rem);
-    line-height: 1.1;
-    letter-spacing: 0.01em;
-    text-align: center;
-    color: var(--titulo);
-    border-bottom: 1px solid var(--linea);
-}
-
-
-p {
-    max-width: 1100px;
-    margin: 0 auto 3.5rem;
-    font-size: 1rem;
-    line-height: 1.8;
-    text-align: left;
-    color: var(--texto);
-    overflow-wrap: break-word;
-
-    column-count: 2;
-    column-gap: clamp(2rem, 5vw, 4rem);
-    column-rule: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-p::first-letter {
-    font-family: var(--serif);
+    font-family: "Cormorant Garamond", serif;
     font-weight: 600;
-    font-size: 3.2em;
-    line-height: 0.8;
-    color: var(--acento);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--lavanda);
+    text-align: center;
+    margin: 0 0 3rem;
+    letter-spacing: 0.02em;
 }
 
+.item {
+    margin: 0 0 1.4rem;
+    padding: 1.2rem 1.5rem;
+    text-align: justify;
+    hyphens: auto;
+    font-size: 1.05rem;
+    background: var(--fondo-item);
+    border-left: 2px solid var(--lavanda);
+    border-radius: 0 12px 12px 0;
+}
+
+.item p { margin: 0.6rem 0 0; }
+
+.item ul { margin: 0.6rem 0 0; padding-left: 1.4rem; }
+
+.item blockquote {
+    margin: 0.8rem 0 0;
+    padding-left: 1rem;
+    border-left: 1px solid var(--borde);
+    font-style: italic;
+}
+
+.termino {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+    font-size: 1.2em;
+    color: var(--lavanda);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+}
 
 .boton {
     display: block;
     width: fit-content;
-    margin: 0 auto;
-    padding: 0.85rem 2.2rem;
-    font-family: var(--sans);
+    margin: 3rem auto 0;
+    padding: 0.8rem 1.8rem;
+    color: var(--texto);
+    font-family: "Jost", sans-serif;
     font-weight: 500;
-    font-size: 0.95rem;
     text-decoration: none;
-    color: var(--titulo);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--borde);
     border-radius: 999px;
-    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
 }
 
-.boton:hover {
-    background: var(--titulo);
-    color: var(--fondo);
-    border-color: var(--titulo);
-}
-
+.boton:hover,
 .boton:focus-visible {
-    outline: 2px solid var(--acento);
-    outline-offset: 4px;
-}
-::selection {
-    background: var(--acento);
+    background: var(--lavanda);
+    border-color: var(--lavanda);
     color: var(--fondo);
 }
 
-@media (max-width: 800px) {
-    p {
-        column-count: 1;
-        font-size: 1.02rem;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-
-    .boton {
-        transition: none;
-    }
+@media (max-width: 600px) {
+    .item { padding: 1rem; font-size: 1rem; text-align: left; }
 }
