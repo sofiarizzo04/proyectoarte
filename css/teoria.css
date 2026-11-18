@@ -1,0 +1,122 @@
+
+:root {
+    --fondo: #14121f;
+    --fondo-2: #231f38;
+    --texto: #d9d4f2;
+    --titulo: #f3f0ff;
+    --acento: #b9b0f5;
+    --linea: rgba(255, 255, 255, 0.28);
+
+    --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 5vw, 4rem) 4rem;
+    font-family: var(--sans);
+    font-weight: 400;
+    color: var(--texto);
+    background:
+        radial-gradient(ellipse at 50% 0%, var(--fondo-2) 0%, transparent 65%),
+        var(--fondo);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+}
+
+h2 {
+    max-width: 22ch;
+    margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+    padding-bottom: 1.5rem;
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: var(--titulo);
+    border-bottom: 1px solid var(--linea);
+}
+
+
+p {
+    max-width: 1100px;
+    margin: 0 auto 3.5rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    text-align: left;
+    color: var(--texto);
+    overflow-wrap: break-word;
+
+    column-count: 2;
+    column-gap: clamp(2rem, 5vw, 4rem);
+    column-rule: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+p::first-letter {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 3.2em;
+    line-height: 0.8;
+    color: var(--acento);
+}
+
+
+.boton {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0.85rem 2.2rem;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: var(--titulo);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.boton:hover {
+    background: var(--titulo);
+    color: var(--fondo);
+    border-color: var(--titulo);
+}
+
+.boton:focus-visible {
+    outline: 2px solid var(--acento);
+    outline-offset: 4px;
+}
+::selection {
+    background: var(--acento);
+    color: var(--fondo);
+}
+
+@media (max-width: 800px) {
+    p {
+        column-count: 1;
+        font-size: 1.02rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .boton {
+        transition: none;
+    }
+}
